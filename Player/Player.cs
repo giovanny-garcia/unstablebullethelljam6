@@ -34,5 +34,23 @@ public partial class Player : CharacterBody2D
         }
         Velocity = velocity;
         MoveAndSlide();
+
+        if (Input.IsActionJustPressed("ATTACK"))
+        {
+            Attack();
+        }
+    }
+    private void Attack()
+    {
+        /*
+            we will want to reference the weapon node here, ensuring that the 
+            weapon is equipped before attacking, also that the weapon's bullet 
+            is correctly set up and changes when the player changes weapons
+
+            maybe we could set up a variable for for the weeapon type and maybe
+            introduce a unique game mechanic to parry attacks. maybe a reflector 
+            and a shield is also a parry mechanic.  
+
+        */
     }
 }

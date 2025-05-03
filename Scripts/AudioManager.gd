@@ -61,7 +61,6 @@ func set_bus_volume(bus_name: String, volume: float):
 		else:
 			push_error("Bus not found: " + bus_name)
 		
-
 func set_bus_mute(bus_name: String, mute: bool):
 	if bus_name in buses:
 		AudioServer.set_bus_mute(buses[bus_name], mute)
