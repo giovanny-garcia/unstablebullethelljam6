@@ -1,20 +1,25 @@
 using Godot;
 using System;
 
+
 public partial class Player : CharacterBody2D
 {
     private float speed = 50.0f;
     private int health = 100;
     private int damage = 10;
+    private Node2D bullet;
+    private int bulletSpeed = 400;
 
     public override void _Ready()
     {
+        bullet = GetNode<Node2D>("Bullet");
+        
         // Initialize player properties
     }
     public override void _Process(double delta)
     {
         /*
-        
+
         */
     }
 
@@ -42,6 +47,8 @@ public partial class Player : CharacterBody2D
     }
     private void Attack()
     {
+
+
         /*
             we will want to reference the weapon node here, ensuring that the 
             weapon is equipped before attacking, also that the weapon's bullet 
@@ -51,6 +58,12 @@ public partial class Player : CharacterBody2D
             introduce a unique game mechanic to parry attacks. maybe a reflector 
             and a shield is also a parry mechanic.  
 
+            attacks could be prevented by a randomized effect causing a player to
+            hold a specific button to charge the attack, or maybe a cooldown on the
+            attack.
+
+            for now we will just move the preloaded bullet
         */
+        GD.Print("Attack!");
     }
 }

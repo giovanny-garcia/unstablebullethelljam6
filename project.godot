@@ -20,6 +20,16 @@ config/icon="res://icon.svg"
 AudioManager="*res://Scripts/AudioManager.gd"
 Global="*res://Scripts/Global.gd"
 GameStateManager="*res://Scripts/GameStateManager.gd"
+SceneManager="*res://Scripts/SceneManager.gd"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/resizable=false
+window/stretch/mode="viewport"
+window/stretch/aspect="ignore"
+window/stretch/scale_mode="integer"
 
 [dotnet]
 
@@ -70,3 +80,4 @@ ACTION1={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_transforms_to_pixel=true
