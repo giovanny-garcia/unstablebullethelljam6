@@ -12,7 +12,7 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
-        bullet = GetNode<Node2D>("Bullet");
+        //bullet = GetNode<Node2D>("Bullet");
         
         // Initialize player properties
     }

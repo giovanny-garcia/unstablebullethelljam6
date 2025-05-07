@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://5hfjngw1rldf" path="res://Scripts/WeaponManager.gd" id="3_8g4oa"]
 [ext_resource type="Texture2D" uid="uid://cdvgalu08pdre" path="res://Assets/arrow.png" id="5_8g4oa"]
 [ext_resource type="Script" uid="uid://ca1fe7v5f74fx" path="res://Scripts/ShootingDirection.gd" id="6_6ysni"]
-[ext_resource type="PackedScene" uid="uid://3i2nfgruktn1" path="res://Scenes/Bullet/Bullet.tscn" id="6_vlldt"]
+[ext_resource type="Script" uid="uid://bdwipib1kjer2" path="res://Scripts/BulletPool.cs" id="7_vlldt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ddoul"]
 radius = 3.0
@@ -40,4 +40,5 @@ texture_filter = 1
 position = Vector2(13, 0)
 texture = ExtResource("5_8g4oa")
 
-[node name="Bullet" parent="." instance=ExtResource("6_vlldt")]
+[node name="BulletPool" type="Node" parent="."]
+script = ExtResource("7_vlldt")

@@ -3,8 +3,8 @@ using System;
 
 public partial class BulletPool : Node
 {
-	private List<Bullet> pool = new List<Bullet>();
-	private int poolSize = 1000;
+	//private List<Bullet> pool = new List<Bullet>();
+	/*private int poolSize = 1000;
 	
 	public override void _Ready()
 	{
@@ -14,7 +14,7 @@ public partial class BulletPool : Node
 			bullet.Visible = false;
 			bullet.SetProcess(false);
 			AddChild(bullet);
-			pool.Add(bullet);
+			//pool.Add(bullet);
 		}
 	}
 	
@@ -38,4 +38,5 @@ public partial class BulletPool : Node
 		bullet.SetProcess(false);
 		bullet.Position = Vector2.Zero;
 	}
+	*/
 }

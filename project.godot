@@ -21,6 +21,7 @@ AudioManager="*res://Scripts/AudioManager.gd"
 Global="*res://Scripts/Global.gd"
 GameStateManager="*res://Scripts/GameStateManager.gd"
 SceneManager="*res://Scripts/SceneManager.gd"
+BulletManager="*res://Scripts/BulletManager.cs"
 
 [display]
 

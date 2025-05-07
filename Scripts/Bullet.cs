@@ -3,7 +3,7 @@ using System;
 
 public partial class Bullet : Area2D
 {
-	public Vector2 Velocity { get; set; }
+	/*public Vector2 Velocity { get; set; }
 	public override void _PhysicsProcess(float delta)
 	{
 		Position += Velocity * delta;
@@ -11,5 +11,5 @@ public partial class Bullet : Area2D
 		{
 			GetParent<BulletPool>().ReturnBullet(this);
 		}
-	}
+	}*/
 }
