@@ -8,7 +8,7 @@ public partial class Player : CharacterBody2D
     private float speed = 50.0f;
     private int health = 100;
     private int damage = 10;
-    private Node2D bullet;
+    private Bullet bullet;
     private int bulletSpeed = 400;
     
 
@@ -51,5 +51,6 @@ public partial class Player : CharacterBody2D
     {
        var bullet = bulletPool.GetBullet();
         bullet.Position = GlobalPosition;
+        bullet.Velocity = new Vector2(bulletSpeed, 10);
     }
 }

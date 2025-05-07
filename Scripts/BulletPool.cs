@@ -40,7 +40,7 @@ public partial class BulletPool : Node
         // Expand the pool if no bullets are available
         for (int i = 0; i < 100; i++)
         {
-            var bullet = (Node2D)bulletScene.Instantiate();
+            var bullet = (Bullet)bulletScene.Instantiate();
             bullet.Visible = false;
             bullet.SetProcess(false);
             AddChild(bullet);
@@ -49,7 +49,7 @@ public partial class BulletPool : Node
         return GetBullet();
     }
     
-    public void ReturnBullet(Node2D bullet)
+    public void ReturnBullet(Bullet bullet)
     {
         bullet.Visible = false;
         bullet.SetProcess(false);
