@@ -46,6 +46,10 @@ public partial class BulletPool : Node
             AddChild(bullet);
             pool.Add(bullet);
         }
+        //maybe we could add some logic to remove bullets 
+        // that are not used for a while
+        // or to limit the pool size
+        
         return GetBullet();
     }
     

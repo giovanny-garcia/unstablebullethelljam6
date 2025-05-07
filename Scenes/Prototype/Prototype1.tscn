@@ -18,6 +18,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_4whww")]
 y_sort_enabled = true
+position = Vector2(321, 181)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -4

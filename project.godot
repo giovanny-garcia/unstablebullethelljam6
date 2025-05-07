@@ -18,10 +18,10 @@ config/icon="res://icon.svg"
 [autoload]
 
 AudioManager="*res://Scripts/Autoloads/AudioManager.gd"
-Global="*res://Scripts/Autoloads/Global.gd"
 GameStateManager="*res://Scripts/Autoloads/GameStateManager.gd"
 SceneManager="*res://Scripts/SceneManager.gd"
 BulletManager="*res://Scripts/Autoloads/BulletManager.cs"
+Global="*res://Scripts/Autoloads/Global.cs"
 
 [display]
 
@@ -35,6 +35,10 @@ window/stretch/scale_mode="integer"
 [dotnet]
 
 project/assembly_name="UnstableBulletHellJam6"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
 
 [file_customization]
 

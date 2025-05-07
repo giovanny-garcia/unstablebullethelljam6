@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctdk1kb0slnun"]
+[gd_scene load_steps=10 format=4 uid="uid://ctdk1kb0slnun"]
 
 [ext_resource type="Script" uid="uid://br0gdsox8ai4i" path="res://Player/Player.cs" id="1_q3lat"]
-[ext_resource type="Texture2D" uid="uid://c0motkyv8g1nt" path="res://Player/player-new.png" id="2_8g4oa"]
 [ext_resource type="Script" uid="uid://5hfjngw1rldf" path="res://Scripts/WeaponManager.gd" id="3_8g4oa"]
 [ext_resource type="Texture2D" uid="uid://cdvgalu08pdre" path="res://Assets/arrow.png" id="5_8g4oa"]
 [ext_resource type="Script" uid="uid://ca1fe7v5f74fx" path="res://Scripts/ShootingDirection.gd" id="6_6ysni"]
@@ -10,6 +9,30 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ddoul"]
 radius = 3.0
 height = 10.0
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_8g4oa"]
+_data = PackedByteArray("AAADAAUAAAABAAAAIAAAABEAAADGAAAAUklGRr4AAABXRUJQVlA4TLEAAAAvHwAEEDdAJmCxUwMvTWSUnkzAYllIL48kXpeSNpKghYtWzXPnH5+MEzL/ARC5TP7qZHnvgYPadtvmHzFQENg/A8AiohMR6BB/DB7CENF/tW3bME7bwj+AQiKvT4QAiVIi4kgV9pJJGd9FyKQkQKaU9zXmkvsuyJRiTmJUeoykE6A5+7Hnou/goOwo/lyr7bABcCl+Xpftwg6whYsqmQDAEAA6AUvV4ZNWrd1VHULlUgEA")
+size_override = Vector2(32, 17)
+
+[sub_resource type="Animation" id="Animation_6ysni"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vlldt"]
+_data = {
+&"walk": SubResource("Animation_6ysni")
+}
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 0
@@ -22,7 +45,29 @@ shape = SubResource("CapsuleShape2D_ddoul")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_8g4oa")
+texture = SubResource("PortableCompressedTexture2D_8g4oa")
+hframes = 2
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": false,
+"layer_section": false,
+"output_section": false,
+"pending_changes": {},
+"slice_section": false
+}
+metadata/_aseprite_wizard_config_ = {
+"embed_tex": true,
+"i_mode": 0,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"slice": "",
+"source": "res://Player/player-new.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "ee810d2876c63ffeff3d9bcfb0b2f860"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -43,3 +88,14 @@ texture = ExtResource("5_8g4oa")
 
 [node name="BulletPool" type="Node" parent="."]
 script = ExtResource("7_vlldt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_vlldt")
+}
+
+[node name="AttackCooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_AttackCooldownTimer_timeout"]
