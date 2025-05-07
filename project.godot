@@ -17,11 +17,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-AudioManager="*res://Scripts/AudioManager.gd"
-Global="*res://Scripts/Global.gd"
-GameStateManager="*res://Scripts/GameStateManager.gd"
+AudioManager="*res://Scripts/Autoloads/AudioManager.gd"
+Global="*res://Scripts/Autoloads/Global.gd"
+GameStateManager="*res://Scripts/Autoloads/GameStateManager.gd"
 SceneManager="*res://Scripts/SceneManager.gd"
-BulletManager="*res://Scripts/BulletManager.cs"
+BulletManager="*res://Scripts/Autoloads/BulletManager.cs"
 
 [display]
 
