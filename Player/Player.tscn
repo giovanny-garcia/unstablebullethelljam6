@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://ctdk1kb0slnun"]
+[gd_scene load_steps=12 format=4 uid="uid://ctdk1kb0slnun"]
 
 [ext_resource type="Script" uid="uid://br0gdsox8ai4i" path="res://Player/Player.cs" id="1_q3lat"]
+[ext_resource type="PackedScene" uid="uid://cch6al7lhwoeb" path="res://Player/UI/HealthBar.tscn" id="2_vlldt"]
 [ext_resource type="Script" uid="uid://5hfjngw1rldf" path="res://Scripts/WeaponManager.gd" id="3_8g4oa"]
 [ext_resource type="Texture2D" uid="uid://cdvgalu08pdre" path="res://Assets/arrow.png" id="5_8g4oa"]
 [ext_resource type="Script" uid="uid://ca1fe7v5f74fx" path="res://Scripts/ShootingDirection.gd" id="6_6ysni"]
+[ext_resource type="Script" uid="uid://c4bairvve644g" path="res://Scripts/Components/HealthComponent.gd" id="6_vlldt"]
 [ext_resource type="Script" uid="uid://bdwipib1kjer2" path="res://Scripts/BulletPool.cs" id="7_vlldt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ddoul"]
@@ -35,8 +37,9 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 0
+collision_mask = 12
 script = ExtResource("1_q3lat")
+attackSpeed = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -71,6 +74,13 @@ metadata/_aseprite_wizard_source_file_hash_ = "ee810d2876c63ffeff3d9bcfb0b2f860"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+[node name="HealthBar" parent="Camera2D" instance=ExtResource("2_vlldt")]
+offset_left = -11.0
+offset_top = 10.0
+offset_right = 65.0
+offset_bottom = 16.0
+scale = Vector2(0.295549, 0.295549)
+
 [node name="StateMachine" type="Node" parent="."]
 
 [node name="Moving" type="Node" parent="StateMachine"]
@@ -97,5 +107,10 @@ libraries = {
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Components" type="Node" parent="."]
+
+[node name="HealthComponent" type="Node" parent="Components"]
+script = ExtResource("6_vlldt")
 
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_AttackCooldownTimer_timeout"]

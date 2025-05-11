@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=4 uid="uid://bk3b0ejh3eds7"]
+
+[ext_resource type="Script" uid="uid://ba5g3quod83f2" path="res://Scenes/Enemies/Skull/skull.gd" id="1_6sdih"]
+[ext_resource type="PackedScene" uid="uid://cch6al7lhwoeb" path="res://Player/UI/HealthBar.tscn" id="2_afuj2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c7j2v"]
+radius = 5.0
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_0agpw"]
+_data = PackedByteArray("AAADAAUAAAABAAAACAAAAAgAAABYAAAAUklGRlAAAABXRUJQVlA4TEQAAAAvB8ABEB8gECBcaPAfaENB2gbM1M2/nq8gbQNmsr5/WZv/APA/jiIoiiTFQQ6FIDSgACf5xYsLiiP6Hwif2DTYumSHAA==")
+size_override = Vector2(8, 8)
+
+[node name="Skull" type="Area2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_6sdih")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_c7j2v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("PortableCompressedTexture2D_0agpw")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"embed_tex": true,
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Assets/Enemies/Skull/skull.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "c1698ef0ad9c6c2e4ed9f1604c06f763"
+
+[node name="HealthBar" parent="." instance=ExtResource("2_afuj2")]
+offset_left = -5.0
+offset_top = 5.0
+offset_right = 75.0
+offset_bottom = 9.0
+scale = Vector2(0.154193, 0.154193)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="bullet_entered" from="." to="." method="_on_bullet_entered"]
