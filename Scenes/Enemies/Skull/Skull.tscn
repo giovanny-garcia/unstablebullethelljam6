@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://bk3b0ejh3eds7"]
+[gd_scene load_steps=8 format=4 uid="uid://bk3b0ejh3eds7"]
 
 [ext_resource type="Script" uid="uid://ba5g3quod83f2" path="res://Scenes/Enemies/Skull/skull.gd" id="1_6sdih"]
 [ext_resource type="PackedScene" uid="uid://cch6al7lhwoeb" path="res://Player/UI/HealthBar.tscn" id="2_afuj2"]
+[ext_resource type="Script" uid="uid://8cjdllvgq06f" path="res://Scenes/Enemies/Skull/SkullSleepingState.gd" id="4_xp3j8"]
+[ext_resource type="Script" uid="uid://cybq65uefei3f" path="res://Scenes/Enemies/Skull/SkullWanderingState.gd" id="5_74vsh"]
+[ext_resource type="Script" uid="uid://cxqgijl50gdir" path="res://Scenes/Enemies/Skull/SkullAttackingState.gd" id="6_hxchr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c7j2v"]
 radius = 5.0
@@ -46,5 +49,15 @@ offset_right = 75.0
 offset_bottom = 9.0
 scale = Vector2(0.154193, 0.154193)
 
+[node name="StateMachine" type="Node" parent="."]
+
+[node name="Sleeping" type="Node" parent="StateMachine"]
+script = ExtResource("4_xp3j8")
+
+[node name="Wandering" type="Node" parent="StateMachine"]
+script = ExtResource("5_74vsh")
+
+[node name="Attacking" type="Node" parent="StateMachine"]
+script = ExtResource("6_hxchr")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="bullet_entered" from="." to="." method="_on_bullet_entered"]

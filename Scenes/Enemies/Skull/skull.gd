@@ -1,9 +1,19 @@
 extends Area2D
 
-signal bullet_entered(bullet: Node)
+#signal bullet_entered(bullet: Bullet)
+@onready var healthBar = $HealthBar
+var health = 2
 
 func _ready():
 	connect("body_entered", Callable(self, "_on_body_entered"))
+	healthBar.init_health(health)
+
+func _set_health(value):
+	healthBar._set_health(value)
+	health = health - value
+	if health <= 0:
+		queue_free()
+		return
 	
 func _on_body_entered(body: Node) -> void:
 	print("Detected body type: ", body)
@@ -13,15 +23,10 @@ func _on_body_entered(body: Node) -> void:
 		print("body is not bullet")
 		
 
-func _on_bullet_entered(bullet):
+func _on_bullet_entered(_bullet):
 	print("Bullet entered skull")
 	queue_free()
 
 
-func _on_area_entered(area):
-	if area is Bullet:
-		print("Area entered bullet")
-		queue_free()
-	else:
-		print("Area entered not bullet")
-		queue_free() #for now this works but is far from optimal. 
+func _on_area_entered(_area):
+	_set_health(1)

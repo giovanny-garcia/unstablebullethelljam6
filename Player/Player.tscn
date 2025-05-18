@@ -75,11 +75,11 @@ metadata/_aseprite_wizard_source_file_hash_ = "ee810d2876c63ffeff3d9bcfb0b2f860"
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="HealthBar" parent="Camera2D" instance=ExtResource("2_vlldt")]
-offset_left = -11.0
-offset_top = 10.0
-offset_right = 65.0
-offset_bottom = 16.0
-scale = Vector2(0.295549, 0.295549)
+offset_left = -13.0
+offset_top = 11.0
+offset_right = 63.0
+offset_bottom = 17.0
+scale = Vector2(0.338476, 0.344659)
 
 [node name="StateMachine" type="Node" parent="."]
 
