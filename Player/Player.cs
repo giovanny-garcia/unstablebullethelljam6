@@ -9,7 +9,8 @@ public partial class Player : CharacterBody2D
 	[Export] private float speed = 100.0f;
 	private int health = 100;
 	private int damage = 10;
-	private Bullet bullet;
+	
+	
 	private int bulletSpeed = 400;
 	private AnimationPlayer animationPlayer;
 	private Node2D shootinDirection;
@@ -17,6 +18,9 @@ public partial class Player : CharacterBody2D
 	private bool canShoot = true;
 	private Node healthComponent;
 	private Node healthBar;
+	private Node audioManager;
+	private Node gameStateManager;
+	//private Node audioManager;
 	[Export] private int attackSpeed = 5;
 
 
@@ -26,7 +30,7 @@ public partial class Player : CharacterBody2D
 		healthComponent = GetNode("Components/HealthComponent");
 		healthComponent.Connect("health_changed", new Callable(this, nameof(OnHealthChanged)));
 		healthComponent.Connect("died", new Callable(this, nameof(OnDied)));
-
+		
 
 		//bullet = GetNode<Node2D>("Bullet");
 		bulletPool = GetNode<BulletPool>("BulletPool");
@@ -39,12 +43,12 @@ public partial class Player : CharacterBody2D
 		/*This is used specifically for dealing with scipts that use c# and gdscripts in combination*/
 		healthBar = GetNode("Camera2D/HealthBar");
 		healthBar.Call("init_health", health);
-
-		
+		gameStateManager = GetNode("/root/GameStateManager");
 		// Initialize player properties
 	}
 	public override void _Process(double delta)
 	{
+		gameStateManager.Call("_update_player_position", GlobalPosition);
 		if (Velocity != Vector2.Zero)
 		{
 			animationPlayer.Play("walk");
@@ -77,17 +81,23 @@ public partial class Player : CharacterBody2D
 			// Play attack animation
 			//animationPlayer.Play("attack");
 			Attack();
+			audioManager = GetNode("/root/AudioManager");
+			audioManager.Call("play_sfx", "shoot", -15.0f);
+			// Call the GDScript method from C#
+			//GD.Print(audioManager);
 		}
 	}
 	private void Attack()
 	{
-	   var bullet = bulletPool.GetBullet();
+		var bullet = bulletPool.GetBullet();
 		bullet.Position = GlobalPosition;
 		bullet.Rotation = shootinDirection.Rotation;
 		bullet.Velocity = new Vector2(Mathf.Cos(bullet.Rotation), Mathf.Sin(bullet.Rotation)) * bulletSpeed;
 
+		// Call play_sfx with the sound effect name
 		canShoot = false;
 		attackCooldownTimer.Start();
+		GD.Print(bullet);
 	}
 	private void _on_AttackCooldownTimer_timeout()
 	{

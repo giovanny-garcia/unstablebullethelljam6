@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class BulletPool : Node
 {
-    private List<Node2D> pool = new List<Node2D>();
+    private List<Bullet> pool = new List<Bullet>();
     private int poolSize = 100;
     private PackedScene bulletScene;
 
@@ -20,7 +20,7 @@ public partial class BulletPool : Node
             bullet.Visible = false;
             bullet.SetProcess(false);
             AddChild(bullet);
-            pool.Add(bullet);
+            pool.Add((Bullet)bullet);
         }
     }
     

@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=4 uid="uid://dbmyaeq04t6nt"]
+[gd_scene load_steps=7 format=4 uid="uid://dbmyaeq04t6nt"]
 
+[ext_resource type="Script" uid="uid://dw3tq63re430q" path="res://Scenes/Prototype/prototype_1.gd" id="1_t5ks6"]
 [ext_resource type="PackedScene" uid="uid://ctdk1kb0slnun" path="res://Player/Player.tscn" id="2_4whww"]
 [ext_resource type="Texture2D" uid="uid://c8m8m2gx1d03w" path="res://Assets/spritesheet.aseprite" id="2_7x4wp"]
 [ext_resource type="PackedScene" uid="uid://bk3b0ejh3eds7" path="res://Scenes/Enemies/Skull/Skull.tscn" id="3_7x4wp"]
@@ -30,10 +31,12 @@ sources/1 = SubResource("TileSetAtlasSource_t5ks6")
 
 [node name="Prototype1" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_t5ks6")
 
 [node name="Player" parent="." instance=ExtResource("2_4whww")]
 y_sort_enabled = true
 position = Vector2(321, 181)
+scale = Vector2(1.32499, 1.20498)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -4
@@ -43,13 +46,13 @@ tile_map_data = PackedByteArray("AAAAAAAAAQABAAMAAAABAAEAAQADAAAAAAABAAAAAQAAAAI
 tile_set = SubResource("TileSet_47f37")
 
 [node name="Skull" parent="." instance=ExtResource("3_7x4wp")]
-position = Vector2(72, 53)
+position = Vector2(50, 37)
 
 [node name="Skull2" parent="." instance=ExtResource("3_7x4wp")]
-position = Vector2(105, 53)
+position = Vector2(130, 35)
 
 [node name="Skull3" parent="." instance=ExtResource("3_7x4wp")]
-position = Vector2(159, 75)
+position = Vector2(126, 91)
 
 [node name="Skull4" parent="." instance=ExtResource("3_7x4wp")]
-position = Vector2(112, 82)
+position = Vector2(59, 91)

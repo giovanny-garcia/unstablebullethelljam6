@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bk3b0ejh3eds7"]
+[gd_scene load_steps=9 format=4 uid="uid://bk3b0ejh3eds7"]
 
 [ext_resource type="Script" uid="uid://ba5g3quod83f2" path="res://Scenes/Enemies/Skull/skull.gd" id="1_6sdih"]
 [ext_resource type="PackedScene" uid="uid://cch6al7lhwoeb" path="res://Player/UI/HealthBar.tscn" id="2_afuj2"]
@@ -15,13 +15,6 @@ size_override = Vector2(8, 8)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2l4ql"]
 radius = 69.0072
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_xp3j8"]
-radius = 3.16228
-
-[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_2l4ql"]
-_data = PackedByteArray("AAADAAUAAAABAAAABAAAAAQAAABCAAAAUklGRjoAAABXRUJQVlA4TC4AAAAvA8AAEB8gECCE+5NlQyBA+J+w5YZAgPC/ZMKR+Q/A35SBQCARy19ihIUi+h8a")
-size_override = Vector2(4, 4)
 
 [node name="Skull" type="Area2D"]
 collision_layer = 4
@@ -75,37 +68,9 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange"]
 shape = SubResource("CircleShape2D_2l4ql")
-debug_color = Color(0.545453, 0.389458, 0.0692391, 0.419608)
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
-
-[node name="SkullBullet" type="Area2D" parent="."]
-collision_layer = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SkullBullet"]
-shape = SubResource("CircleShape2D_xp3j8")
-
-[node name="Sprite2D" type="Sprite2D" parent="SkullBullet"]
-texture_filter = 1
-texture = SubResource("PortableCompressedTexture2D_2l4ql")
-metadata/_aseprite_wizard_interface_config_ = {
-"pending_changes": {}
-}
-metadata/_aseprite_wizard_config_ = {
-"embed_tex": true,
-"i_mode": 1,
-"keep_anim_length": false,
-"layers": [],
-"o_ex_p": "",
-"o_folder": "",
-"o_name": "",
-"only_visible": false,
-"player": "",
-"slice": "",
-"source": "res://Assets/skullbullet.aseprite"
-}
-metadata/_aseprite_wizard_source_file_hash_ = "baf8b45dde82e2bc8c2c97e61a79bbed"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="AggroRange" to="." method="_on_area_2d_body_entered"]
