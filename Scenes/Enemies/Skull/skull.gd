@@ -2,15 +2,15 @@ extends Area2D
 
 #signal bullet_entered(bullet: Bullet)
 @onready var healthBar = $HealthBar
-var health = 2
+var health = 4
 
 func _ready():
 	connect("body_entered", Callable(self, "_on_body_entered"))
 	healthBar.init_health(health)
 
 func _set_health(value):
-	healthBar._set_health(value)
 	health = health - value
+	healthBar._set_health(health)
 	if health <= 0:
 		queue_free()
 		return

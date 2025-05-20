@@ -17,6 +17,7 @@ public partial class Player : CharacterBody2D
 	private bool canShoot = true;
 	private Node healthComponent;
 	private Node healthBar;
+	private Node audioManager;
 	[Export] private int attackSpeed = 5;
 
 
@@ -26,7 +27,7 @@ public partial class Player : CharacterBody2D
 		healthComponent = GetNode("Components/HealthComponent");
 		healthComponent.Connect("health_changed", new Callable(this, nameof(OnHealthChanged)));
 		healthComponent.Connect("died", new Callable(this, nameof(OnDied)));
-
+		audioManager = GetNode("/root/AudioManager");
 
 		//bullet = GetNode<Node2D>("Bullet");
 		bulletPool = GetNode<BulletPool>("BulletPool");
@@ -77,6 +78,7 @@ public partial class Player : CharacterBody2D
 			// Play attack animation
 			//animationPlayer.Play("attack");
 			Attack();
+			audioManager.Call("play_sfx", "shoot", -20f);
 		}
 	}
 	private void Attack()

@@ -7,7 +7,7 @@ var buses = { # Dictionary of audio buses
 }
 
 var sound_effects = { # Dictionary of sound effects
-#	"jump": preload("res://Audio/SFX/boing.mp3"),
+	"shoot": preload("res://Audio/Player/shoot.wav"),
 #	"coin": preload("res://Audio/SFX/coin.wav"),
 #	"explosion": preload("res://Audio/SFX/explosion.wav"),
 }
@@ -27,20 +27,23 @@ func _ready() -> void:
 		add_child(sfx)
 		sfx_player.append(sfx)
 
-func play_sfx(sound: String):
+func play_sfx(sound: String, volume: float = 1.0):
 	if sound in sound_effects:
+		var db = linear_to_db(volume)
 		for player in sfx_player:
 			if not player.playing:
 				player.stream = sound_effects[sound]
+				player.volume_db = db
 				player.play()
 				return
-			#if no free player, create a new one    
-			var new_player = AudioStreamPlayer.new()
-			new_player.set_bus("SFX")
-			add_child(new_player)
-			sfx_player.append(new_player)
-			new_player.stream = sound_effects[sound]
-			new_player.play()
+		# If no free player, create a new one
+		var new_player = AudioStreamPlayer.new()
+		new_player.set_bus("SFX")
+		add_child(new_player)
+		sfx_player.append(new_player)
+		new_player.stream = sound_effects[sound]
+		new_player.volume_db = db
+		new_player.play()
 #Play music by AudioStream or path
 func play_music(stream: AudioStream):
 	if music_player.stream != stream:
