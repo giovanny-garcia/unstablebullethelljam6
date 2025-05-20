@@ -49,6 +49,11 @@ folder_colors={
 "res://Scripts/": "yellow"
 }
 
+[global_group]
+
+Player=""
+Enemy=""
+
 [input]
 
 UP={

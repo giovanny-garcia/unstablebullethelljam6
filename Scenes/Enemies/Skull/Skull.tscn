@@ -15,7 +15,7 @@ _data = PackedByteArray("AAADAAUAAAABAAAACAAAAAgAAABYAAAAUklGRlAAAABXRUJQVlA4TEQ
 size_override = Vector2(8, 8)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2l4ql"]
-radius = 40.1995
+radius = 52.0384
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2l4ql"]
 size = Vector2(6, 6)
@@ -24,7 +24,7 @@ size = Vector2(6, 6)
 _data = PackedByteArray("AAADAAUAAAABAAAABAAAAAQAAABCAAAAUklGRjoAAABXRUJQVlA4TC4AAAAvA8AAEB8gECCE+5NlQyBA+J+w5YZAgPC/ZMKR+Q/A35SBQCARy19ihIUi+h8a")
 size_override = Vector2(4, 4)
 
-[node name="Skull" type="Area2D"]
+[node name="Skull" type="Area2D" groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_6sdih")
@@ -74,10 +74,10 @@ script = ExtResource("6_hxchr")
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Zone" type="Area2D" parent="."]
+[node name="DetectionZone" type="Area2D" parent="."]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Zone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
 shape = SubResource("CircleShape2D_2l4ql")
 debug_color = Color(0.573248, 0.553999, 0.0686484, 0.42)
 
@@ -111,4 +111,4 @@ metadata/_aseprite_wizard_source_file_hash_ = "baf8b45dde82e2bc8c2c97e61a79bbed"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="body_entered" from="Zone" to="." method="_on_zone_body_entered"]
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]

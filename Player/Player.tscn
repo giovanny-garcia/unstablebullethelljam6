@@ -36,7 +36,7 @@ _data = {
 &"walk": SubResource("Animation_6ysni")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 12
 script = ExtResource("1_q3lat")
 attackSpeed = 15

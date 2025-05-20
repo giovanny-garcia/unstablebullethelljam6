@@ -19,10 +19,7 @@ func _set_health(value):
 	
 func _on_body_entered(body: Node) -> void:
 	print("Detected body type: ", body)
-	if body is Bullet:
-		print("body is bullet")
-	else:
-		print("body is not bullet")
+	
 		
 
 func _on_bullet_entered(_bullet):
@@ -36,10 +33,18 @@ func _on_area_entered(_area):
 
 func _on_timer_timeout():
 	pass # Replace with function body.
-
-
-func _on_zone_body_entered(_body:Node2D):
-	shoot(GameStateManager.get_player_position())
+	
 
 func shoot(target_position: Vector2):
-	bullet.shoot()
+	#bullet.shoot()
+	pass
+
+
+func _on_detection_zone_body_entered(body:Node2D):
+	if body.is_in_group("Player"):
+		print("Player detected")
+		# shoot at player
+		# Get the player position from the GameStateManager
+		# Assuming GameStateManager is an autoload singleton
+		# and has a method get_player_position()
+		#shoot(GameStateManager.get_player_position())
