@@ -78,7 +78,7 @@ public partial class Player : CharacterBody2D
 			// Play attack animation
 			//animationPlayer.Play("attack");
 			Attack();
-			audioManager.Call("play_sfx", "shoot", -20f);
+			audioManager.Call("play_sfx", "shoot", 0.1f);
 		}
 	}
 	private void Attack()
