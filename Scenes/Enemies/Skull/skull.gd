@@ -2,6 +2,7 @@ extends Area2D
 
 #signal bullet_entered(bullet: Bullet)
 @onready var healthBar = $HealthBar
+@onready var bullet = $Bullet
 var health = 4
 
 func _ready():
@@ -13,6 +14,7 @@ func _set_health(value):
 	healthBar._set_health(health)
 	if health <= 0:
 		queue_free()
+		AudioManager.play_sfx("die", 0.1)
 		return
 	
 func _on_body_entered(body: Node) -> void:
@@ -30,3 +32,14 @@ func _on_bullet_entered(_bullet):
 
 func _on_area_entered(_area):
 	_set_health(1)
+
+
+func _on_timer_timeout():
+	pass # Replace with function body.
+
+
+func _on_zone_body_entered(_body:Node2D):
+	shoot(GameStateManager.get_player_position())
+
+func shoot(target_position: Vector2):
+	bullet.shoot()

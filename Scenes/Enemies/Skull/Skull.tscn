@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://bk3b0ejh3eds7"]
+[gd_scene load_steps=12 format=4 uid="uid://bk3b0ejh3eds7"]
 
 [ext_resource type="Script" uid="uid://ba5g3quod83f2" path="res://Scenes/Enemies/Skull/skull.gd" id="1_6sdih"]
 [ext_resource type="PackedScene" uid="uid://cch6al7lhwoeb" path="res://Player/UI/HealthBar.tscn" id="2_afuj2"]
 [ext_resource type="Script" uid="uid://8cjdllvgq06f" path="res://Scenes/Enemies/Skull/SkullSleepingState.gd" id="4_xp3j8"]
 [ext_resource type="Script" uid="uid://cybq65uefei3f" path="res://Scenes/Enemies/Skull/SkullWanderingState.gd" id="5_74vsh"]
 [ext_resource type="Script" uid="uid://cxqgijl50gdir" path="res://Scenes/Enemies/Skull/SkullAttackingState.gd" id="6_hxchr"]
+[ext_resource type="Script" uid="uid://cqx4riw6gradd" path="res://Scenes/Enemies/Skull/SkullBullet.gd" id="6_xp3j8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c7j2v"]
 radius = 5.0
@@ -12,6 +13,16 @@ radius = 5.0
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_0agpw"]
 _data = PackedByteArray("AAADAAUAAAABAAAACAAAAAgAAABYAAAAUklGRlAAAABXRUJQVlA4TEQAAAAvB8ABEB8gECBcaPAfaENB2gbM1M2/nq8gbQNmsr5/WZv/APA/jiIoiiTFQQ6FIDSgACf5xYsLiiP6Hwif2DTYumSHAA==")
 size_override = Vector2(8, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2l4ql"]
+radius = 40.1995
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2l4ql"]
+size = Vector2(6, 6)
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_2l4ql"]
+_data = PackedByteArray("AAADAAUAAAABAAAABAAAAAQAAABCAAAAUklGRjoAAABXRUJQVlA4TC4AAAAvA8AAEB8gECCE+5NlQyBA+J+w5YZAgPC/ZMKR+Q/A35SBQCARy19ihIUi+h8a")
+size_override = Vector2(4, 4)
 
 [node name="Skull" type="Area2D"]
 collision_layer = 4
@@ -60,4 +71,44 @@ script = ExtResource("5_74vsh")
 [node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource("6_hxchr")
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Zone" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Zone"]
+shape = SubResource("CircleShape2D_2l4ql")
+debug_color = Color(0.573248, 0.553999, 0.0686484, 0.42)
+
+[node name="Bullet" type="Area2D" parent="."]
+collision_layer = 8
+script = ExtResource("6_xp3j8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet"]
+shape = SubResource("RectangleShape2D_2l4ql")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bullet"]
+texture_filter = 1
+texture = SubResource("PortableCompressedTexture2D_2l4ql")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"embed_tex": true,
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Assets/skullbullet.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "baf8b45dde82e2bc8c2c97e61a79bbed"
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Zone" to="." method="_on_zone_body_entered"]

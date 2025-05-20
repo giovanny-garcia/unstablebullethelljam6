@@ -22,6 +22,7 @@ GameStateManager="*res://Scripts/Autoloads/GameStateManager.gd"
 SceneManager="*res://Scripts/SceneManager.gd"
 BulletManager="*res://Scripts/Autoloads/BulletManager.cs"
 Global="*res://Scripts/Autoloads/Global.cs"
+PortalManager="*res://Scripts/Autoloads/PortalManager.gd"
 
 [display]
 

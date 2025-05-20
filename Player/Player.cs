@@ -18,16 +18,24 @@ public partial class Player : CharacterBody2D
 	private Node healthComponent;
 	private Node healthBar;
 	private Node audioManager;
+	private Node gameStateManager;
+	private Node portalManager;
 	[Export] private int attackSpeed = 5;
+	private string parentNodeName;
 
 
 
 	public override void _Ready()
 	{
+		//Global variables
+		audioManager = GetNode("/root/AudioManager");
+		gameStateManager = GetNode("/root/GameStateManager");
+		portalManager = GetNode("/root/PortalManager");
+		//
 		healthComponent = GetNode("Components/HealthComponent");
 		healthComponent.Connect("health_changed", new Callable(this, nameof(OnHealthChanged)));
 		healthComponent.Connect("died", new Callable(this, nameof(OnDied)));
-		audioManager = GetNode("/root/AudioManager");
+		
 
 		//bullet = GetNode<Node2D>("Bullet");
 		bulletPool = GetNode<BulletPool>("BulletPool");
@@ -41,11 +49,14 @@ public partial class Player : CharacterBody2D
 		healthBar = GetNode("Camera2D/HealthBar");
 		healthBar.Call("init_health", health);
 
+		parentNodeName = GetParent().Name;
+		GD.Print("Parent node name: " + parentNodeName);
 		
 		// Initialize player properties
 	}
 	public override void _Process(double delta)
 	{
+		gameStateManager.Call("set_player_position", GlobalPosition);
 		if (Velocity != Vector2.Zero)
 		{
 			animationPlayer.Play("walk");

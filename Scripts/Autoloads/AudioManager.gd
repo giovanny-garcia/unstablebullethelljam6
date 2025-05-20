@@ -8,7 +8,7 @@ var buses = { # Dictionary of audio buses
 
 var sound_effects = { # Dictionary of sound effects
 	"shoot": preload("res://Audio/Player/shoot.wav"),
-#	"coin": preload("res://Audio/SFX/coin.wav"),
+	"die": preload("res://Audio/Skull/die.wav"),
 #	"explosion": preload("res://Audio/SFX/explosion.wav"),
 }
 
