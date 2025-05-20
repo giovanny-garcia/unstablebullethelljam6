@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://ctdk1kb0slnun"]
+[gd_scene load_steps=13 format=4 uid="uid://ctdk1kb0slnun"]
 
 [ext_resource type="Script" uid="uid://br0gdsox8ai4i" path="res://Player/Player.cs" id="1_q3lat"]
 [ext_resource type="PackedScene" uid="uid://cch6al7lhwoeb" path="res://Player/UI/HealthBar.tscn" id="2_vlldt"]
@@ -36,8 +36,11 @@ _data = {
 &"walk": SubResource("Animation_6ysni")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vlldt"]
+radius = 6.0
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-collision_mask = 12
+collision_mask = 28
 script = ExtResource("1_q3lat")
 attackSpeed = 15
 
@@ -113,4 +116,14 @@ one_shot = true
 [node name="HealthComponent" type="Node" parent="Components"]
 script = ExtResource("6_vlldt")
 
+[node name="HurtBox" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="HurtBox"]
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox/Area2D"]
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_vlldt")
+
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_AttackCooldownTimer_timeout"]
+[connection signal="area_entered" from="HurtBox/Area2D" to="." method="_on_hurtbox_area_2d_area_entered"]

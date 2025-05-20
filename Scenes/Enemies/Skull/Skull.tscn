@@ -112,3 +112,4 @@ metadata/_aseprite_wizard_source_file_hash_ = "baf8b45dde82e2bc8c2c97e61a79bbed"
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
