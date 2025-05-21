@@ -15,7 +15,7 @@ _data = PackedByteArray("AAADAAUAAAABAAAACAAAAAgAAABYAAAAUklGRlAAAABXRUJQVlA4TEQ
 size_override = Vector2(8, 8)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2l4ql"]
-radius = 52.0384
+radius = 101.045
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2l4ql"]
 size = Vector2(6, 6)

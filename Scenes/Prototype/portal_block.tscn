@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://f33w631n0jtk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_isrjs"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ayajo"]
+size = Vector2(16, 16)
+
+[node name="PortalBlock" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_isrjs")
+
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(24, 0)
+shape = SubResource("RectangleShape2D_ayajo")

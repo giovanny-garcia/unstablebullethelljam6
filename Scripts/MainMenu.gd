@@ -4,7 +4,7 @@ extends Control
 #@onready var main_theme = preload("")
 
 func _on_play_pressed():
-	SceneManager.change_scene("Scenes/Prototype/Prototype1.tscn")
+	SceneManager.change_scene("Scenes/Levels/Cloverwood.tscn")
 	#audio
 
 func _on_options_pressed():

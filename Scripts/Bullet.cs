@@ -20,10 +20,10 @@ public partial class Bullet : Area2D
         Velocity = Velocity.Normalized() * 400;
 
         // Check distance traveled
-        if (GlobalPosition.DistanceTo(startPosition) >= maxDistance)
+        /*if (GlobalPosition.DistanceTo(startPosition) >= maxDistance)
         {
             GetParent<BulletPool>().ReturnBullet(this);
-        }
+        }*/
     }
 
     public void ResetBullet(Vector2 position, Vector2 velocity)

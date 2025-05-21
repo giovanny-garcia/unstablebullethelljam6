@@ -4,6 +4,7 @@ extends Area2D
 @onready var healthBar = $HealthBar
 @onready var bullet = $Bullet
 @onready var detectionZone = $DetectionZone
+@onready var fire_timer = $Timer
 @export var bullet_speed: float = 200.0
 @export var max_bullet_distance: float = 500.0
 @export var fire_cooldown: float = 1.0
@@ -25,6 +26,12 @@ func _ready():
 	bullet.set_deferred("monitoring", false)
 	bullet.set_deferred("monitorable", false)
 	bullet.visible = false
+
+	fire_timer.wait_time = fire_cooldown
+	fire_timer.one_shot = false
+	fire_timer.autostart = false
+	fire_timer.connect("timeout", Callable(self, "_on_fire_timer_timeout"))
+	# timer setup
 
 func _physics_process(delta):
 	if bullet_active:
@@ -61,13 +68,14 @@ func _on_area_entered(_area): #when a bullet hits skull it takes one damage.. ma
 
 
 func _on_timer_timeout(): #not implemented just on some bull
-	pass 
+	if player_in_zone:
+		fire_bullet()
 
 func _on_detection_zone_body_entered(body:Node2D):
 	if body.is_in_group("Player"):
 		print("Player detected")
 		player_in_zone = true
-		try_firing()		
+		fire_timer.start()	
 		
 func disable_bullet():
 	# Reset bullet to initial state
@@ -83,7 +91,10 @@ func try_firing():
 		fire_bullet()
 
 func fire_bullet():
-	# Calculate the direction to the player from the skull's current position
+	# First, reset bullet position to skull's position
+	bullet.global_position = global_position
+
+	# Now calculate the direction to the player from the skull's current position
 	var player_position = GameStateManager.get_player_position()
 	bullet_direction = (player_position - bullet.global_position).normalized()
 	
@@ -94,14 +105,13 @@ func fire_bullet():
 	bullet.visible = true
 	distance_traveled = 0.0
 
-	# Optionally reset bullet position to skull's position
-	bullet.global_position = global_position
-
 	# Start cooldown
 	can_shoot = false
-	await get_tree().create_timer(fire_cooldown).timeout
+	fire_timer.start(fire_cooldown)
+	await fire_timer.timeout
 	can_shoot = true
-	while player_in_zone:
+	if player_in_zone == true:
+		print("Player in zone, firing bullet")
 		try_firing()
 
 func _on_bullet_body_entered(body: Node2D):
@@ -117,4 +127,3 @@ func _on_detection_zone_body_exited(body: Node2D):
 	if body.is_in_group("Player"):
 		print("Player left detection zone")
 		player_in_zone = false
-

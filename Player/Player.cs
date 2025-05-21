@@ -32,10 +32,12 @@ public partial class Player : CharacterBody2D
 		gameStateManager = GetNode("/root/GameStateManager");
 		portalManager = GetNode("/root/PortalManager");
 		//
-		healthComponent = GetNode("Components/HealthComponent");
-		healthComponent.Connect("health_changed", new Callable(this, nameof(OnHealthChanged)));
-		healthComponent.Connect("died", new Callable(this, nameof(OnDied)));
-		
+		//healthComponent = GetNode("Components/HealthComponent");
+		//healthComponent.Connect("health_changed", new Callable(this, nameof(OnHealthChanged)));
+		//healthComponent.Connect("died", new Callable(this, nameof(OnDied)));
+
+
+
 
 		//bullet = GetNode<Node2D>("Bullet");
 		bulletPool = GetNode<BulletPool>("BulletPool");
@@ -51,7 +53,7 @@ public partial class Player : CharacterBody2D
 
 		parentNodeName = GetParent().Name;
 		GD.Print("Parent node name: " + parentNodeName);
-		
+
 		// Initialize player properties
 	}
 	public override void _Process(double delta)
@@ -94,8 +96,8 @@ public partial class Player : CharacterBody2D
 	}
 	private void Attack()
 	{
-	   var bullet = bulletPool.GetBullet();
-		bullet.Position = GlobalPosition;
+		var bullet = bulletPool.GetBullet();
+		bullet.GlobalPosition = GlobalPosition;
 		bullet.Rotation = shootinDirection.Rotation;
 		bullet.Velocity = new Vector2(Mathf.Cos(bullet.Rotation), Mathf.Sin(bullet.Rotation)) * bulletSpeed;
 
@@ -119,25 +121,27 @@ public partial class Player : CharacterBody2D
 	}
 	private void OnDied()
 	{
+		//gameStateManager changes state to game over. 
 		GD.Print("Player has died!");
 		// Handle death (e.g., respawn or game over logic)
 	}
-
-	public void ApplyDamage(int amount)
+	private void OnArea2DAreaEntered(Area2D _area)
 	{
-		// Call the GDScript method
-		healthComponent.Call("apply_damage", amount);
+		damage_handler(1);
+		GD.Print("Bullet hit on player");
+		// Your logic here
 	}
-
-	public void Heal(int amount)
+	private void damage_handler(int damage)
 	{
-		// Call the GDScript method
-		healthComponent.Call("heal", amount);
-	}
-
-	public void ResetHealth()
-	{
-		// Call the GDScript method
-		healthComponent.Call("reset_health");
+		health -= damage;
+		if (health < 0)
+		{
+			healthBar.Call("_set_health", health);
+		}
+		else
+		{
+			OnDied();
+		}
+		
 	}
 }

@@ -37,7 +37,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vlldt"]
-radius = 6.0
+radius = 8.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 28
@@ -92,6 +92,7 @@ scale = Vector2(0.338476, 0.344659)
 script = ExtResource("3_8g4oa")
 
 [node name="ShootingDirection" type="Node2D" parent="."]
+z_index = 5
 script = ExtResource("6_6ysni")
 
 [node name="Sprite2D" type="Sprite2D" parent="ShootingDirection"]
@@ -122,8 +123,8 @@ script = ExtResource("6_vlldt")
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox/Area2D"]
-position = Vector2(0, 7)
+position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_vlldt")
 
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_AttackCooldownTimer_timeout"]
-[connection signal="area_entered" from="HurtBox/Area2D" to="." method="_on_hurtbox_area_2d_area_entered"]
+[connection signal="area_entered" from="HurtBox/Area2D" to="." method="OnArea2DAreaEntered"]
