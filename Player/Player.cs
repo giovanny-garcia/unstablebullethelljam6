@@ -36,9 +36,6 @@ public partial class Player : CharacterBody2D
 		//healthComponent.Connect("health_changed", new Callable(this, nameof(OnHealthChanged)));
 		//healthComponent.Connect("died", new Callable(this, nameof(OnDied)));
 
-
-
-
 		//bullet = GetNode<Node2D>("Bullet");
 		bulletPool = GetNode<BulletPool>("BulletPool");
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -134,14 +131,14 @@ public partial class Player : CharacterBody2D
 	private void damage_handler(int damage)
 	{
 		health -= damage;
-		if (health < 0)
+		if (health > 0)
 		{
+			GD.Print(health);
 			healthBar.Call("_set_health", health);
 		}
-		else
+		else if (health == 0)
 		{
 			OnDied();
 		}
-		
 	}
 }

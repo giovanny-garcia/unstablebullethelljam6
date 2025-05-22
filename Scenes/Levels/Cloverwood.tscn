@@ -3549,6 +3549,7 @@ tile_set = SubResource("TileSet_fth3n")
 
 [node name="Player" parent="." instance=ExtResource("3_iurir")]
 z_index = 4
+position = Vector2(32, 32)
 
 [node name="SpawnPoint" parent="." instance=ExtResource("4_eh451")]
 position = Vector2(347, 240)
@@ -3574,7 +3575,7 @@ polygon = PackedVector2Array(-39, 57, -15, 57, -15, 41, 1, 41, 1, 57, 41, 57, 41
 collision_layer = 16
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionAreas/TownBorder"]
-polygon = PackedVector2Array(1104, 0, 0, 0, 0, 512, 1104, 512, 1104, 432, 1120, 432, 1120, 416, 1104, 416, 1104, 0, 1152, -64, 1216, 576, -64, 576, -64, -64, 1152, -64)
+polygon = PackedVector2Array(1104, 0, 0, 0, 0, 512, 1104, 512, 1104, 432, 1120, 432, 1120, 416, 1104, 416, 1104, 0, 1152, -64, 1152, 576, -64, 576, -64, -64, 1152, -64)
 
 [node name="Clinic" type="StaticBody2D" parent="CollisionAreas"]
 
