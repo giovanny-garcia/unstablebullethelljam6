@@ -1,0 +1,124 @@
+extends Node
+
+const SAVE_FOLDER = "user://saves/"
+const MAX_SAVE_SLOTS = 10
+
+var current_save_slot: int = -1
+
+func _ready():
+	# Create saves folder if it doesn't exist
+	if not DirAccess.dir_exists_absolute(SAVE_FOLDER):
+		DirAccess.open("user://").make_dir("saves")
+
+func get_save_path(slot: int) -> String:
+	return SAVE_FOLDER + "save_slot_%d.tres" % slot
+
+func get_screenshot_path(slot: int) -> String:
+	return SAVE_FOLDER + "save_slot_%d_screenshot.png" % slot
+
+func save_game(slot: int, save_data: GameSave) -> bool:
+	var save_path = get_save_path(slot)
+	
+	# Add playtime from GameManager
+	if GameStateManager:
+		save_data.playtime_seconds = GameStateManager.total_playtime
+	
+	# Take screenshot for save slot
+	take_save_screenshot(slot)
+	save_data.screenshot_path = get_screenshot_path(slot)
+	
+	var result = ResourceSaver.save(save_data, save_path)
+	if result == OK:
+		current_save_slot = slot
+		print("Game saved to slot %d successfully!" % slot)
+		return true
+	else:
+		print("Failed to save game to slot %d. Error: %d" % [slot, result])
+		return false
+
+func load_game(slot: int) -> GameSave:
+	var save_path = get_save_path(slot)
+	
+	if ResourceLoader.exists(save_path):
+		var save_data = ResourceLoader.load(save_path) as GameSave
+		if save_data != null:
+			current_save_slot = slot
+			print("Game loaded from slot %d successfully!" % slot)
+			return save_data
+		else:
+			print("Failed to load save data from slot %d" % slot)
+	else:
+		print("No save file found in slot %d" % slot)
+	
+	return null
+
+func save_exists(slot: int) -> bool:
+	return ResourceLoader.exists(get_save_path(slot))
+
+func delete_save(slot: int) -> bool:
+	if save_exists(slot):
+		var dir = DirAccess.open("user://saves")
+		var save_result = dir.remove("save_slot_%d.tres" % slot)
+		var screenshot_result = dir.remove("save_slot_%d_screenshot.png" % slot)
+		return save_result == OK
+	return false
+
+func get_all_saves() -> Array[Dictionary]:
+	var saves = []
+	
+	for i in range(MAX_SAVE_SLOTS):
+		var save_info = {
+			"slot": i,
+			"exists": false,
+			"save_name": "",
+			"timestamp": "",
+			"playtime": "",
+			"screenshot_path": ""
+		}
+		
+		if save_exists(i):
+			var save_data = ResourceLoader.load(get_save_path(i)) as GameSave
+			if save_data:
+				save_info.exists = true
+				save_info.save_name = save_data.save_name
+				save_info.timestamp = save_data.save_timestamp
+				save_info.playtime = format_playtime(save_data.playtime_seconds)
+				save_info.screenshot_path = save_data.screenshot_path
+		
+		saves.append(save_info)
+	
+	return saves
+
+func format_playtime(seconds: float) -> String:
+	var hours = int(seconds) / 3600
+	var minutes = (int(seconds) % 3600) / 60
+	return "%02d:%02d" % [hours, minutes]
+
+func take_save_screenshot(slot: int):
+	# Take screenshot for save slot preview
+	var viewport = get_viewport()
+	var img = viewport.get_texture().get_image()
+	var screenshot_path = get_screenshot_path(slot)
+	img.save_png(screenshot_path)
+
+func quick_save() -> bool:
+	# Use last used slot or slot 0
+	var slot = current_save_slot if current_save_slot >= 0 else 0
+	var save_data = create_save_from_gamemanager()
+	return save_game(slot, save_data)
+
+func create_save_from_gamemanager() -> GameSave:
+	var save_data = GameSave.new()
+	
+	# Pull data from your GameManager
+	if GameManager:
+		save_data.player_name = GameManager.player_name
+		save_data.level = GameManager.player_level
+		save_data.experience = GameManager.player_exp
+		save_data.health = GameManager.player_health
+		save_data.position = GameManager.player_position
+		save_data.inventory = GameManager.player_inventory.duplicate()
+		save_data.current_scene = get_tree().current_scene.scene_file_path
+		save_data.playtime_seconds = GameManager.total_playtime
+	
+	return save_data

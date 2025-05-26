@@ -45,9 +45,10 @@ func play_sfx(sound: String, volume: float = 1.0):
 		new_player.volume_db = db
 		new_player.play()
 #Play music by AudioStream or path
-func play_music(stream: AudioStream):
+func play_music(stream: AudioStream, volume_db: float = 0.0):
 	if music_player.stream != stream:
 		music_player.stream = stream
+		music_player.set_volume_db(volume_db)
 		music_player.play()
 
 func stop_music():

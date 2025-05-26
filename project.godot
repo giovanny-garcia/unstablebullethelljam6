@@ -23,6 +23,11 @@ SceneManager="*res://Scripts/SceneManager.gd"
 BulletManager="*res://Scripts/Autoloads/BulletManager.cs"
 Global="*res://Scripts/Autoloads/Global.cs"
 PortalManager="*res://Scripts/Autoloads/PortalManager.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+
+[dialogue_manager]
+
+runtime/advanced/uses_dotnet=true
 
 [display]
 
@@ -38,13 +43,16 @@ project/assembly_name="UnstableBulletHellJam6"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
 "res://Assets/": "green",
+"res://Audio/": "blue",
+"res://Dialogue/": "purple",
 "res://Player/": "red",
+"res://Resources/": "pink",
 "res://Scenes/": "orange",
 "res://Scripts/": "yellow"
 }
