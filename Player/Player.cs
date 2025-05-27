@@ -90,6 +90,10 @@ public partial class Player : CharacterBody2D
 			Attack();
 			audioManager.Call("play_sfx", "shoot", 0.1f);
 		}
+		if (Input.IsActionPressed("INTERACT"))
+		{
+			//enable the interaction Node
+		}
 	}
 	private void Attack()
 	{
