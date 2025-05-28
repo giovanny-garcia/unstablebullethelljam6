@@ -40,7 +40,7 @@ _data = {
 radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s1rgi"]
-radius = 15.0
+radius = 27.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 28
@@ -136,7 +136,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractingHitbox"]
-position = Vector2(-15, 5)
+position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_s1rgi")
 
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_AttackCooldownTimer_timeout"]

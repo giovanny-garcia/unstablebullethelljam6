@@ -9,7 +9,7 @@ const GAME_SAVE_PATH := "res://GameSave.tres"
 @export var map := ""
 
 func write_save() -> void:
-	ResourceSaver.save(GAME_SAVE_PATH, self)
+	pass #ResourceSaver.save(GAME_SAVE_PATH, self)
 
 static func load_save() -> Resource:
 	if ResourceLoader.exists(GAME_SAVE_PATH):

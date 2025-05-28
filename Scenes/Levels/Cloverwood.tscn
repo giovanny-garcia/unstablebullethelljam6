@@ -1,11 +1,13 @@
-[gd_scene load_steps=16 format=4 uid="uid://bw8ga4j6jdrei"]
+[gd_scene load_steps=23 format=4 uid="uid://bw8ga4j6jdrei"]
 
 [ext_resource type="Script" uid="uid://y453rmfxst7w" path="res://Scenes/Levels/cloverwood.gd" id="1_x66qq"]
 [ext_resource type="Texture2D" uid="uid://dkgpx6gq8dkuo" path="res://Assets/spr_tileset_sunnysideworld_16px.png" id="1_ywsyw"]
 [ext_resource type="PackedScene" uid="uid://ctdk1kb0slnun" path="res://Player/Player.tscn" id="3_iurir"]
-[ext_resource type="PackedScene" uid="uid://d4kx8bbnbfagd" path="res://Scenes/spawn_point.tscn" id="4_eh451"]
+[ext_resource type="PackedScene" uid="uid://d4kx8bbnbfagd" path="res://Scenes/SpawnPoint.tscn" id="4_eh451"]
+[ext_resource type="PackedScene" uid="uid://bykjpipfwx0q5" path="res://Dialogue/ExampleBalloon/Balloon.tscn" id="4_giaq7"]
 [ext_resource type="Script" uid="uid://b4tkw8kdw4oda" path="res://Scenes/Levels/portals_cloverwood.gd" id="5_iurir"]
 [ext_resource type="PackedScene" uid="uid://bk3b0ejh3eds7" path="res://Scenes/Enemies/Skull/Skull.tscn" id="6_eh451"]
+[ext_resource type="Script" uid="uid://e6g5sekgpab7" path="res://Scenes/Levels/LGT3.gd" id="8_8tvgp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_awdxe"]
 texture = ExtResource("1_ywsyw")
@@ -3519,6 +3521,39 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ayajo"]
 size = Vector2(16, 16)
 
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_giaq7"]
+_data = PackedByteArray("AAADAAUAAAABAAAAJgAAACIAAAByAQAAUklGRmoBAABXRUJQVlA4TF0BAAAvJUAIEEegmJEkaEgugYEZf4r9rweRAIQjskGMcldWlEaSwvwTLIVgk6b/opj5DwAAvK/qiScLjHuXNQFWI0mWnJT6CIzf37cDoHerCXi6CBiCIRjCYd+1bAgR/Z8A/jclXUmKi7atU9quANJqO4Au2QV0jd0uSD+PtgP65fW13UH6+3t31enjYy8fpB+P0T2DfBnjM7YZ9Bijch2kfoYiD9Dz+y62IEvqIKAlFQnpbgdAV7ngVP7FfaU5pwVkr7UqgPZ9uU6ed/tierritLwsQG2rK0jZJQuyfS6QL4P/TUl/atu6kBSntNoOIG1XAF1jtwvokl2nl7e3dgfp59HuuNrLB+mvr71ckC9jfMY2I/14jPYWpH6GIg/oMUZpHWRJHQTo+X2XtiDd7QDoKtctIV3+xe0C0JzTAtRrrQqgfV+uk+fd7tP0dAWkl5d1A7WtriBll6wb2T4XlC8FAA==")
+size_override = Vector2(38, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tvgp"]
+atlas = SubResource("PortableCompressedTexture2D_giaq7")
+region = Rect2(0, 0, 19, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_026jm"]
+atlas = SubResource("PortableCompressedTexture2D_giaq7")
+region = Rect2(19, 0, 19, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ektyu"]
+atlas = SubResource("PortableCompressedTexture2D_giaq7")
+region = Rect2(0, 17, 19, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vgpst"]
+animations = [{
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_8tvgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_026jm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ektyu")
+}],
+"loop": true,
+"name": &"blink",
+"speed": 20.0
+}]
+
 [node name="Cloverwood" type="Node2D"]
 script = ExtResource("1_x66qq")
 
@@ -3556,8 +3591,12 @@ tile_map_data = PackedByteArray("AAAYAP//AAAcABIAAAATAP//AAAZABIAAAAVAP7/AAAaABI
 tile_set = SubResource("TileSet_fth3n")
 
 [node name="Player" parent="." instance=ExtResource("3_iurir")]
+unique_name_in_owner = true
 z_index = 4
 position = Vector2(32, 32)
+
+[node name="ExampleBalloon" parent="Player" instance=ExtResource("4_giaq7")]
+visible = false
 
 [node name="SpawnPoint" parent="." instance=ExtResource("4_eh451")]
 position = Vector2(347, 240)
@@ -3662,7 +3701,38 @@ position = Vector2(40, 0)
 [node name="Skull4" parent="Enemies" instance=ExtResource("6_eh451")]
 position = Vector2(-32, 0)
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(344, 224)
+sprite_frames = SubResource("SpriteFrames_vgpst")
+animation = &"blink"
+script = ExtResource("8_8tvgp")
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": false,
+"layer_section": false,
+"output_section": false,
+"pending_changes": {},
+"slice_section": false
+}
+metadata/_aseprite_wizard_config_ = {
+"embed_tex": true,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Assets/Lord Grompulous The 7th.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "517aa54d0f17cc22ff7f239fad278238"
+
+[node name="Timer" type="Timer" parent="AnimatedSprite2D"]
+wait_time = 6.0
+one_shot = true
+
 [connection signal="body_entered" from="Portals/Library/LibraryEntrance" to="Portals" method="_on_library_portal_body_entered"]
 [connection signal="body_entered" from="Portals/Library/LibraryExit" to="Portals" method="_on_library_exit_body_entered"]
 [connection signal="body_entered" from="Portals/Forest/ForestEntrance" to="Portals" method="_on_forest_entrance_body_entered"]
 [connection signal="body_exited" from="Portals/Forest/ForestExit" to="Portals" method="_on_forest_exit_body_exited"]
+[connection signal="timeout" from="AnimatedSprite2D/Timer" to="AnimatedSprite2D" method="_on_timer_timeout"]

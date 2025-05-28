@@ -5,12 +5,16 @@ using System;
 public partial class Player : CharacterBody2D
 {
 	[Export] private NodePath bulletPoolPath;
+	[Export] private float speed = 50.0f;
 	private BulletPool bulletPool;
-	[Export] private float speed = 100.0f;
-	private int health = 100;
-	private int damage = 10;
 	private Bullet bullet;
 	private int bulletSpeed = 400;
+	private int maxHealth = 100;
+	private int health = 100;
+	private int damage = 10; //damage not yet implemented
+	[Export] private int attackSpeed = 5;
+	private int level = 1;
+	
 	private AnimationPlayer animationPlayer;
 	private Node2D shootinDirection;
 	private Timer attackCooldownTimer;
@@ -20,7 +24,7 @@ public partial class Player : CharacterBody2D
 	private Node audioManager;
 	private Node gameStateManager;
 	private Node portalManager;
-	[Export] private int attackSpeed = 5;
+	
 	private string parentNodeName;
 
 
@@ -47,7 +51,7 @@ public partial class Player : CharacterBody2D
 		/*This is used specifically for dealing with scipts that use c# and gdscripts in combination*/
 		healthBar = GetNode("Camera2D/HealthBar");
 		healthBar.Call("init_health", health);
-
+		level = (int)gameStateManager.Call("get_player_level");
 		parentNodeName = GetParent().Name;
 		GD.Print("Parent node name: " + parentNodeName);
 
@@ -55,6 +59,13 @@ public partial class Player : CharacterBody2D
 	}
 	public override void _Process(double delta)
 	{
+		if ((int)gameStateManager.Call("get_player_level") > level)
+		{
+			level = (int)gameStateManager.Call("get_player_level");
+			attackSpeed = attackSpeed + GD.RandRange(1,2);
+			maxHealth = maxHealth + GD.RandRange(1,4);
+			health = maxHealth;
+		}
 		gameStateManager.Call("set_player_position", GlobalPosition);
 		if (Velocity != Vector2.Zero)
 		{

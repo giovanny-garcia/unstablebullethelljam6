@@ -50,6 +50,8 @@ func _set_health(value): #handles the skull health as well as updating the healt
 	health = health - value
 	healthBar._set_health(health)
 	if health <= 0:
+		#gamestatemanager.giveplayexp(randirange)
+		GameStateManager.give_xp(randi_range(1,4))
 		queue_free()
 		AudioManager.play_sfx("die", 0.1)
 		return
