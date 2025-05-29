@@ -12,12 +12,18 @@ var save_timestamp: String = ""
 
 func _ready():
 	pass
+	
 func _process(delta: float):
-	if player_exp == 100:
-		level_up()
+	pass
 		
 func give_xp(xp: int):
-	player_exp += xp
+	var total_exp
+	total_exp = player_exp + xp
+	if total_exp < 100:
+		player_exp += xp
+	elif total_exp >= 100:
+		level_up()
+		player_exp = total_exp - 100
 	print("received experience: ", xp)
 		
 func level_up():

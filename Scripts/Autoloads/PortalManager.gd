@@ -5,5 +5,6 @@ func teleport_player_to(target_position: Vector2, level: String) -> void:
 	if player:
 		player.position = target_position
 		print("Player teleported to: ", target_position)
+		AudioManager.play_sfx("door")
 	else:
 		print("Player node not found.")

@@ -3,10 +3,10 @@ extends Area2D
 var speed: float = 400.0
 
 func shoot(target_position: Vector2):
-    pass
+	pass
 
 func _physics_process(delta):
-    pass
+	pass
 
 func _ready():
-    pass
+	pass
