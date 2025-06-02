@@ -4,15 +4,19 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-	[Export] private NodePath bulletPoolPath;
-	[Export] private float speed = 50.0f;
+	[Export] private NodePath bulletPoolPath; //here lies the bullet pool 
+	
 	private BulletPool bulletPool;
 	private Bullet bullet;
+	
+	[Export] private float speed = 50.0f; //player movement speed
+
 	private int bulletSpeed = 400;
 	private int maxHealth = 100;
+	
 	private int health = 100;
 	private int damage = 10; //damage not yet implemented
-	[Export] private int attackSpeed = 5;
+	[Export] private int attackSpeed = 5; 
 	private int level = 1;
 	
 	private AnimationPlayer animationPlayer;
@@ -44,6 +48,11 @@ public partial class Player : CharacterBody2D
 		bulletPool = GetNode<BulletPool>("BulletPool");
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		shootinDirection = GetNode<Node2D>("ShootingDirection");
+		{
+			get { return shootingDirections; }
+			set { shootingDirection = value; }
+		}
+
 		animationPlayer.Active = true;
 		attackCooldownTimer = GetNode<Timer>("AttackCooldownTimer");
 		attackCooldownTimer.WaitTime = UpdateAttackSpeed(attackSpeed);
