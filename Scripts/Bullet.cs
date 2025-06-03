@@ -37,7 +37,7 @@ public partial class Bullet : Area2D
     {
         GetParent<BulletPool>().ReturnBullet(this);
     }
-
+	private Bullet bullet;
     private void OnBodyEntered(Node body)
     {
         GetParent<BulletPool>().ReturnBullet(this);

@@ -21,10 +21,11 @@ public partial class Player : CharacterBody2D
 	
 	private AnimationPlayer animationPlayer;
 	private Node2D shootinDirection;
-	private Timer attackCooldownTimer;
+	private Timer attackCooldownTimer; // in sync with shooting speed
 	private bool canShoot = true;
 	private Node healthComponent;
 	private Node healthBar;
+	//Global local references
 	private Node audioManager;
 	private Node gameStateManager;
 	private Node portalManager;
@@ -39,7 +40,8 @@ public partial class Player : CharacterBody2D
 		audioManager = GetNode("/root/AudioManager");
 		gameStateManager = GetNode("/root/GameStateManager");
 		portalManager = GetNode("/root/PortalManager");
-		//
+		private BulletPool bulletPool;
+		private Bullet bullet;
 		//healthComponent = GetNode("Components/HealthComponent");
 		//healthComponent.Connect("health_changed", new Callable(this, nameof(OnHealthChanged)));
 		//healthComponent.Connect("died", new Callable(this, nameof(OnDied)));
