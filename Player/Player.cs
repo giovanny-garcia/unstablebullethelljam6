@@ -40,8 +40,6 @@ public partial class Player : CharacterBody2D
 		audioManager = GetNode("/root/AudioManager");
 		gameStateManager = GetNode("/root/GameStateManager");
 		portalManager = GetNode("/root/PortalManager");
-		private BulletPool bulletPool;
-		private Bullet bullet;
 		//healthComponent = GetNode("Components/HealthComponent");
 		//healthComponent.Connect("health_changed", new Callable(this, nameof(OnHealthChanged)));
 		//healthComponent.Connect("died", new Callable(this, nameof(OnDied)));
@@ -50,10 +48,6 @@ public partial class Player : CharacterBody2D
 		bulletPool = GetNode<BulletPool>("BulletPool");
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		shootinDirection = GetNode<Node2D>("ShootingDirection");
-		{
-			get { return shootingDirections; }
-			set { shootingDirection = value; }
-		}
 
 		animationPlayer.Active = true;
 		attackCooldownTimer = GetNode<Timer>("AttackCooldownTimer");
