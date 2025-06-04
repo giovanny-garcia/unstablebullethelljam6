@@ -3,11 +3,12 @@
 importer="aseprite_wizard.plugin.static-texture"
 type="PortableCompressedTexture2D"
 uid="uid://c8m8m2gx1d03w"
-valid=false
+path="res://.godot/imported/spritesheet.aseprite-dca102adb1a55c7a6fd590e23b3b1304.res"
 
 [deps]
 
 source_file="res://Assets/spritesheet.aseprite"
+dest_files=["res://.godot/imported/spritesheet.aseprite-dca102adb1a55c7a6fd590e23b3b1304.res"]
 
 [params]
 
