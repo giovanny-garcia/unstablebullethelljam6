@@ -2,17 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drjfciwitjm83"
-path="res://.godot/imported/responses_menu.svg-87cf63ca685d53616205049572f4eb8f.ctex"
+uid="uid://c5f1jkte7pler"
+path="res://.godot/imported/space.jpg-1666206e1711f9bd02b650f6d5a297f4.ctex"
 metadata={
-"has_editor_variant": true,
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/dialogue_manager/assets/responses_menu.svg"
-dest_files=["res://.godot/imported/responses_menu.svg-87cf63ca685d53616205049572f4eb8f.ctex"]
+source_file="res://Assets/space.jpg"
+dest_files=["res://.godot/imported/space.jpg-1666206e1711f9bd02b650f6d5a297f4.ctex"]
 
 [params]
 
@@ -35,6 +34,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=true
-editor/convert_colors_with_editor_theme=true

@@ -9,7 +9,7 @@ extends Control
 
 
 func _on_play_pressed():
-	SceneManager.change_scene("Scenes/Levels/Cloverwood.tscn")
+	SceneManager.change_scene("Scenes/Menus/PlayMenu.tscn")
 	AudioManager.play_sfx("button")
 
 func _on_options_pressed():

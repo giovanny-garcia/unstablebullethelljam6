@@ -24,6 +24,7 @@ BulletManager="*res://Scripts/Autoloads/BulletManager.cs"
 Global="*res://Scripts/Autoloads/Global.cs"
 PortalManager="*res://Scripts/Autoloads/PortalManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+SaveManager="*res://Scripts/Autoloads/SaveManager.gd"
 
 [dialogue_manager]
 
