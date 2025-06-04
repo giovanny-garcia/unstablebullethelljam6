@@ -1,5 +1,6 @@
 extends Node
 
+var player: CharacterBody2D
 var player_name: String = "Player"
 var player_level: int = 1 
 var player_exp: int = 0
@@ -12,6 +13,7 @@ var save_timestamp: String = ""
 
 func _ready():
 	pass
+	#player = get_node(player_name)
 	
 func _process(delta: float):
 	pass
@@ -38,3 +40,8 @@ func set_player_position(position: Vector2) -> void:
 	
 func get_player_position() -> Vector2:
 	return player_position
+
+func set_player_to_talking_state() -> void:
+	pass
+	#player.set_state_to_talking()
+	

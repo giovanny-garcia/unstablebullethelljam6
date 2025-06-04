@@ -5,20 +5,20 @@ using System;
 public partial class Player : CharacterBody2D
 {
 	[Export] private NodePath bulletPoolPath; //here lies the bullet pool 
-	
+
 	private BulletPool bulletPool;
 	private Bullet bullet;
-	
+
 	[Export] private float speed = 50.0f; //player movement speed
 
 	private int bulletSpeed = 400;
 	private int maxHealth = 100;
-	
+
 	private int health = 100;
 	private int damage = 10; //damage not yet implemented
-	[Export] private int attackSpeed = 5; 
+	[Export] private int attackSpeed = 5;
 	private int level = 1;
-	
+
 	private AnimationPlayer animationPlayer;
 	private Node2D shootinDirection;
 	private Timer attackCooldownTimer; // in sync with shooting speed
@@ -29,7 +29,7 @@ public partial class Player : CharacterBody2D
 	private Node audioManager;
 	private Node gameStateManager;
 	private Node portalManager;
-	
+	private Node StateMachine;
 	private string parentNodeName;
 
 
@@ -48,6 +48,7 @@ public partial class Player : CharacterBody2D
 		bulletPool = GetNode<BulletPool>("BulletPool");
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		shootinDirection = GetNode<Node2D>("ShootingDirection");
+		StateMachine = GetNode<Node>("StateMachine");
 
 		animationPlayer.Active = true;
 		attackCooldownTimer = GetNode<Timer>("AttackCooldownTimer");
@@ -67,18 +68,19 @@ public partial class Player : CharacterBody2D
 		if ((int)gameStateManager.Call("get_player_level") > level)
 		{
 			level = (int)gameStateManager.Call("get_player_level");
-			attackSpeed = attackSpeed + GD.RandRange(1,2);
-			maxHealth = maxHealth + GD.RandRange(1,4);
+			attackSpeed = attackSpeed + GD.RandRange(1, 2);
+			maxHealth = maxHealth + GD.RandRange(1, 4);
 			health = maxHealth;
 		}
 		gameStateManager.Call("set_player_position", GlobalPosition);
+
 		if (Velocity != Vector2.Zero)
 		{
-			animationPlayer.Play("walk");
+			StateMachine.Call("change_state", "PlayerMoving");
 		}
 		else
 		{
-			animationPlayer.Pause();
+			StateMachine.Call("change_state", "PlayerIdle");
 		}
 	}
 
@@ -160,5 +162,10 @@ public partial class Player : CharacterBody2D
 		{
 			OnDied();
 		}
+	}
+	public void set_state_to_talking()
+	{
+		StateMachine.Call("change_state", "PlayerTalking");
+		GD.Print("Player is now talking");
 	}
 }

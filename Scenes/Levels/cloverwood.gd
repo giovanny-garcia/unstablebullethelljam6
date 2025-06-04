@@ -9,4 +9,5 @@ var dialogue_resource = preload("res://Dialogue/CloverWood.dialogue")
 func _ready():
 	player.position = spawnpoint.position
 	# :) 
-	DialogueManager.show_dialogue_balloon(dialogue_resource)	
+	DialogueManager.show_dialogue_balloon(dialogue_resource)
+	#GameStateManager.set_player_to_talking_state()

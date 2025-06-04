@@ -1,13 +1,22 @@
 ~ start
 
-LGT7: [[Good Day.|Wassup|Howdy|Dude, welcome.]] This project is under development and is subject to change.
+LGT7: [[Good Day!|Wassup!!|Howdy.|Dude... welcome.| I hope that you're having a good day.]] This project is under development and is subject to [rainbow freq=1.0 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]A LOT[/wave][/rainbow] of change.
 LGT7: The Current Devs are goofy and don't know what to make of this project so you're free to explore.
-LGT7: There is litte to no content. 
+LGT7: There is litte to no content, but we are open to ideas.
+LGT7: We are currently designing [color=DARK_MAGENTA]dungeons[/color] and [color=CRIMSON]bosses[/color] to help bring the experience all together to make an expansive bullet hell roguelike.
+~ first
 - What am I doing here?
-	LGT7: I don't know. Maybe you'll be able to kill some enemies or something.
+	You: What am I doing here?
+	LGT7: I don't know. Maybe you'll be able to kill some enemies or something. Like I said. There is literally nothing to do this is simply a prototype. => first
 - Where should I go?
-	LGT7: There are some skulls haunting the forest southeast of cloverwood. Maybe you should kill them.
-- I didn't read what you said => start
+	You: Where should I go?
+	LGT7: There are some skulls haunting the forest southeast of cloverwood. Maybe you should kill them. => first
+- Who are you? => second
 - See you later. => END
+You: See you later.
 LGT7: See ya.
+
+~ second
+You: Who are you?
+LGT7: Me? I'm Lord Grompulous the 7th and Im here to help you by making you not feel so alone. You might not expect it but I must hide my identity because I am so very attractive and it would be distracting. => first
 => END
