@@ -15,7 +15,7 @@ func _ready():
 	pass
 	#player = get_node(player_name)
 	
-func _process(delta: float):
+func _process(_delta: float):
 	pass
 		
 func give_xp(xp: int):

@@ -6,5 +6,5 @@ func enter() -> void:
 func update(_delta: float) -> void:
 	# Idle state logic, e.g., checking for input or animations
 	pass #replace with actual logic that checks from the GameStateManager if the player is moving
-    
-    #transition.emit(self, "move") #emit the transition signal to move state
+	
+	#transition.emit(self, "move") #emit the transition signal to move state

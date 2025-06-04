@@ -59,7 +59,7 @@ func start_new_game(slot: int):
 	SaveManager.selected_save_slot = slot
 	get_tree().change_scene_to_file("res://scenes/Levels/Cloverwood.tscn")
 func _on_file_1_pressed() -> void:
-	SaveManager
+	pass
 
 
 func _on_file_2_pressed() -> void:
