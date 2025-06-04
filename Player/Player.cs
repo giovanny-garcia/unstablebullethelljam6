@@ -76,11 +76,11 @@ public partial class Player : CharacterBody2D
 
 		if (Velocity != Vector2.Zero)
 		{
-			StateMachine.Call("change_state", "PlayerMoving");
+			StateMachine.Call("on_child_transition", "PlayerIdleState", "PlayerMovingState");
 		}
 		else
 		{
-			StateMachine.Call("change_state", "PlayerIdle");
+			StateMachine.Call("on_child_transition", "Player");
 		}
 	}
 
@@ -163,9 +163,9 @@ public partial class Player : CharacterBody2D
 			OnDied();
 		}
 	}
-	public void set_state_to_talking()
+	public Vector2 get_movement_direction()
 	{
-		StateMachine.Call("change_state", "PlayerTalking");
-		GD.Print("Player is now talking");
+		Vector2 input_vector = Input.GetVector("LEFT", "RIGHT", "UP", "DOWN");
+		return input_vector.Normalized();
 	}
 }
