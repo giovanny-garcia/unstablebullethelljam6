@@ -48,7 +48,7 @@ public partial class Player : CharacterBody2D
 		bulletPool = GetNode<BulletPool>("BulletPool");
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		shootinDirection = GetNode<Node2D>("ShootingDirection");
-		StateMachine = GetNode<Node>("StateMachine");
+		//StateMachine = GetNode<Node>("StateMachine");
 
 		animationPlayer.Active = true;
 		attackCooldownTimer = GetNode<Timer>("AttackCooldownTimer");
@@ -74,14 +74,14 @@ public partial class Player : CharacterBody2D
 		}
 		gameStateManager.Call("set_player_position", GlobalPosition);
 
-		if (Velocity != Vector2.Zero)
+		/*if (Velocity != Vector2.Zero)
 		{
 			StateMachine.Call("on_child_transition", "PlayerIdleState", "PlayerMovingState");
 		}
 		else
 		{
 			StateMachine.Call("on_child_transition", "Player");
-		}
+		}*/
 	}
 
 	public override void _PhysicsProcess(double delta)

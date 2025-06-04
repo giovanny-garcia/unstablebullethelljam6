@@ -1,6 +1,6 @@
 extends Control
 
-@onready var music = preload("res://Audio/Menu/BulletHellMainMenuDemo.ogg")
+@onready var music = preload("res://Audio/Menu/MainMenu.wav")
 @onready var packed_settings_scene
 
 @export var music_level: float = -15.0
