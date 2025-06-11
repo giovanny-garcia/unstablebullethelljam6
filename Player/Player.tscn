@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://ctdk1kb0slnun"]
+[gd_scene load_steps=17 format=4 uid="uid://ctdk1kb0slnun"]
 
 [ext_resource type="Script" uid="uid://br0gdsox8ai4i" path="res://Player/Player.cs" id="1_q3lat"]
 [ext_resource type="PackedScene" uid="uid://cch6al7lhwoeb" path="res://Player/UI/HealthBar.tscn" id="2_vlldt"]
@@ -15,6 +15,23 @@ height = 10.0
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_8g4oa"]
 _data = PackedByteArray("AAADAAUAAAABAAAAIAAAABEAAADGAAAAUklGRr4AAABXRUJQVlA4TLEAAAAvHwAEEDdAJmCxUwMvTWSUnkzAYllIL48kXpeSNpKghYtWzXPnH5+MEzL/ARC5TP7qZHnvgYPadtvmHzFQENg/A8AiohMR6BB/DB7CENF/tW3bME7bwj+AQiKvT4QAiVIi4kgV9pJJGd9FyKQkQKaU9zXmkvsuyJRiTmJUeoykE6A5+7Hnou/goOwo/lyr7bABcCl+Xpftwg6whYsqmQDAEAA6AUvV4ZNWrd1VHULlUgEA")
 size_override = Vector2(32, 17)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vlldt"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s1rgi"]
+radius = 27.0
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_vlldt"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s1rgi"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_j23h2"]
+states/BlendSpace2D/node = SubResource("AnimationNodeBlendSpace2D_vlldt")
+states/BlendSpace2D/position = Vector2(384, 100)
+transitions = ["Start", "BlendSpace2D", SubResource("AnimationNodeStateMachineTransition_s1rgi")]
+graph_offset = Vector2(-70, -38)
 
 [sub_resource type="Animation" id="Animation_6ysni"]
 loop_mode = 1
@@ -35,12 +52,6 @@ tracks/0/keys = {
 _data = {
 &"walk": SubResource("Animation_6ysni")
 }
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_vlldt"]
-radius = 8.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_s1rgi"]
-radius = 27.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 28
@@ -110,12 +121,6 @@ texture = ExtResource("5_8g4oa")
 [node name="BulletPool" type="Node" parent="."]
 script = ExtResource("7_vlldt")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
-libraries = {
-&"": SubResource("AnimationLibrary_vlldt")
-}
-
 [node name="AttackCooldownTimer" type="Timer" parent="."]
 one_shot = true
 
@@ -142,6 +147,20 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractingHitbox"]
 position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_s1rgi")
+
+[node name="RollCooldownTimer" type="Timer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Sprite2D")
+tree_root = SubResource("AnimationNodeStateMachine_j23h2")
+anim_player = NodePath("../AnimationPlayer")
+parameters/BlendSpace2D/blend_position = Vector2(0.000862837, 0.00694442)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_vlldt")
+}
 
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_AttackCooldownTimer_timeout"]
 [connection signal="area_entered" from="HurtBox/Area2D" to="." method="OnArea2DAreaEntered"]

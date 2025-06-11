@@ -11,6 +11,8 @@ var total_playtime: float = 0.0
 var save_name: String = ""
 var save_timestamp: String = ""
 
+var is_in_game: bool = false
+
 func _ready():
 	pass
 	#player = get_node(player_name)
@@ -44,4 +46,9 @@ func get_player_position() -> Vector2:
 func set_player_to_talking_state() -> void:
 	pass
 	#player.set_state_to_talking()
+
+func set_is_player_in_game(state: bool) -> void:
+	is_in_game = state
 	
+func get_is_player_in_game() -> bool:
+	return is_in_game

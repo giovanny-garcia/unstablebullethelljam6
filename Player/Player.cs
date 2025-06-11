@@ -108,9 +108,9 @@ public partial class Player : CharacterBody2D
 			Attack();
 			audioManager.Call("play_sfx", "shoot", 0.1f);
 		}
-		if (Input.IsActionPressed("INTERACT"))
+		if (Input.IsActionPressed("ESCAPE"))
 		{
-			//enable the interaction Node
+			gameStateManager.Call("set_is_player_in_game", true);
 		}
 	}
 	private void Attack()

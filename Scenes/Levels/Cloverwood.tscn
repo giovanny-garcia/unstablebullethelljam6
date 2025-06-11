@@ -3612,9 +3612,11 @@ tile_set = SubResource("TileSet_fth3n")
 
 [node name="Player" parent="." instance=ExtResource("3_iurir")]
 unique_name_in_owner = true
-z_index = 2
+z_index = 3
 y_sort_enabled = true
 position = Vector2(72, 16)
+speed = 75.0
+attackSpeed = 20
 
 [node name="ExampleBalloon" parent="Player" instance=ExtResource("4_giaq7")]
 visible = false
